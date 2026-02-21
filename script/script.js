@@ -112,6 +112,23 @@ function renderJobs() {
     emptyState.classList.add("hidden");
   }
 
+  // updated dashboard
+
+  function updateDashboard() {
+    document.getElementById("totalCount").innerText = jobs.length;
+
+    let interviewTotal = jobs.filter(function (job) {
+      return job.status === "interview";
+    });
+
+    let rejectedTotal = jobs.filter(function (job) {
+      return job.status === "rejected";
+    });
+
+    document.getElementById("interviewCount").innerText = interviewTotal.length;
+    document.getElementById("rejectedCount").innerText = rejectedTotal.length;
+  }
+
   //   create div for jobs
 
   for (let i = 0; i < filteredJobs.length; i++) {
@@ -123,14 +140,26 @@ function renderJobs() {
     card.innerHTML = `
        <h3 class="text-xl font-bold">${job.position}</h3>
        <p>${job.company}</p>
-       <p>${job.location} ${job.tyoe}</p>
+       <p>${job.location} ${job.Type}</p>
        <p>${job.salary}</p>
        <p>${job.description}</p>
+
+       <div class="flex justify-between">
+           <button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Interview</button>
+           <button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Rejected</button>
+
+           <div><button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Delete</button></div>
+           
+       </div>
+
+       
        
     `;
-   
+
+    jobContainer.appendChild(card);
   }
 
- 
-}
+  updateDashboard();
 
+  
+}
