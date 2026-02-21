@@ -112,5 +112,25 @@ function renderJobs() {
     emptyState.classList.add("hidden");
   }
 
-  
+  //   create div for jobs
+
+  for (let i = 0; i < filteredJobs.length; i++) {
+    let job = filteredJobs[i];
+
+    let card = document.createElement("div");
+    card.className = "bg-gray-50 p-5 rounded-xl shadow";
+
+    card.innerHTML = `
+       <h3 class="text-xl font-bold">${job.position}</h3>
+       <p>${job.company}</p>
+       <p>${job.location} ${job.tyoe}</p>
+       <p>${job.salary}</p>
+       <p>${job.description}</p>
+       
+    `;
+   
+  }
+
+ 
 }
+
