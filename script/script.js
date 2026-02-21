@@ -105,4 +105,12 @@ function renderJobs() {
   }
 
   document.getElementById("tabCount").innerText = filteredJobs.length;
+
+  if (filteredJobs.length === 0) {
+    emptyState.classList.remove("hidden");
+  } else {
+    emptyState.classList.add("hidden");
+  }
+
+  
 }
