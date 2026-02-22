@@ -184,6 +184,21 @@ document.addEventListener("click", function (event) {
     setActiveTab(event.target);
     renderJobs();
   }
+
+  // rejhected button
+
+  if (event.target.classList.contains("rejectedBtn")) {
+    let id = Number(event.target.dataset.id);
+
+    for (let i = 0; i < jobs.length; i++) {
+      if (jobs[i].id === id) {
+        jobs[i].status = "rejected";
+      }
+    }
+    renderJobs();
+  }
+
+ 
 });
 
 // active tab
