@@ -139,20 +139,20 @@ function renderJobs() {
 
     card.innerHTML = `
        <h3 class="text-xl font-bold">${job.position}</h3>
+        <div class="flex justify-end">
+          <div><button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Delete</button></div>
+        </div>
        <p>${job.company}</p>
        <p>${job.location} ${job.Type}</p>
        <p>${job.salary}</p>
        <p>${job.description}</p>
+       
 
-       <div class="flex justify-between">
+       <div class="">
            <button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Interview</button>
-           <button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Rejected</button>
-
-           <div><button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Delete</button></div>
+           <button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Rejected</button>  
            
        </div>
-
-       
        
     `;
 
@@ -185,3 +185,19 @@ document.addEventListener("click", function (event) {
     renderJobs();
   }
 });
+
+// active tab
+
+function setActiveTab(activeButton) {
+  let tabs = document.querySelectorAll(".tab-btn");
+
+  for (let i = 0; i < tabs.lengths; i++) {
+    tabs[i].classList.remove("bg-black", "text-white");
+    tabs[i].classList.add("bg-gray-200");
+  }
+
+  activeButton.classList.remove("bg-gray-200");
+  activeButton.classList.add("bg-black", "text-white");
+}
+
+renderJobs();
