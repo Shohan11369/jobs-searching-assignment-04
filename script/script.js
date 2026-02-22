@@ -9,7 +9,7 @@ let jobs = [
     Type: "full time",
     salary: "RM 5000- RM 8000",
     description: "Develop scalable web applications using React.",
-    status: "all",
+    status: "applied",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ let jobs = [
     Type: "full time",
     salary: "RM 5000- RM 8000",
     description: "Develop scalable web applications using React.",
-    status: "all",
+    status: "applied",
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ let jobs = [
     Type: "full time",
     salary: "RM 5000- RM 8000",
     description: "Develop scalable web applications using React.",
-    status: "all",
+    status: "applied",
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ let jobs = [
     Type: "full time",
     salary: "RM 5000- RM 8000",
     description: "Develop scalable web applications using React.",
-    status: "all",
+    status: "applied",
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ let jobs = [
     Type: "full time",
     salary: "RM 5000- RM 8000",
     description: "Develop scalable web applications using React.",
-    status: "all",
+    status: "applied",
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ let jobs = [
     Type: "full time",
     salary: "RM 5000- RM 8000",
     description: "Develop scalable web applications using React.",
-    status: "all",
+    status: "applied",
   },
   {
     id: 7,
@@ -69,7 +69,7 @@ let jobs = [
     Type: "full time",
     salary: "RM 5000- RM 8000",
     description: "Develop scalable web applications using React.",
-    status: "all",
+    status: "applied",
   },
   {
     id: 8,
@@ -79,7 +79,7 @@ let jobs = [
     Type: "full time",
     salary: "RM 5000- RM 8000",
     description: "Develop scalable web applications using React.",
-    status: "all",
+    status: "applied",
   },
 ];
 
@@ -137,14 +137,35 @@ function renderJobs() {
     let card = document.createElement("div");
     card.className = "bg-gray-50 p-5 rounded-xl shadow mt-4";
 
+    let statusBadge = "";
+
+    if (job.status === "interview") {
+      statusBadge = `
+         <span class="bg-green-100 text-green-600 px-3 py-2 rounded text-sm">
+          INTERVIEW
+         </span>
+      `;
+    } else if (job.status === "rejected") {
+      statusBadge = `
+         <span class="bg-red-200 text-red-600 px-3 py-2 rounded text-sm">Rejected</span>
+      `;
+    } else {
+      statusBadge = `
+         <span class="bg-gray-200 text-gray-600 px-3 py-2 rounded text-sm">Nt Applied</span>
+      `;
+    }
+
     card.innerHTML = `
        <h3 class="text-xl font-bold">${job.position}</h3>
         <div class="flex justify-end">
-          <div><button class="deleteBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Delete</button></div>
+          <div><button class="deleteBtn bg-red-500 text-white px-3 py-1 rounded" data-id=${job.id}><i class="deleteBtn fa-regular fa-trash-can" data-id=${job.id}></i>Delete</button></div>
         </div>
        <p>${job.company}</p>
        <p>${job.location} ${job.Type}</p>
-       <p>${job.salary}</p>
+       <p class="mb-4">${job.salary}</p>
+
+       <div class="mb-3">${statusBadge}</div>
+       
        <p>${job.description}</p>
        
 
@@ -170,7 +191,6 @@ document.addEventListener("click", function (event) {
     currentTab = "all";
     setActiveTab(event.target);
     renderJobs();
-    
   }
 
   if (event.target.id === "interviewTab") {
@@ -182,6 +202,19 @@ document.addEventListener("click", function (event) {
   if (event.target.id === "rejectedTab") {
     currentTab = "rejected";
     setActiveTab(event.target);
+    renderJobs();
+  }
+
+  // interview
+
+  if (event.target.classList.contains("interviewBtn")) {
+    let id = Number(event.target.dataset.id);
+
+    for (let i = 0; i < jobs.length; i++) {
+      if (jobs[i].id === id) {
+        jobs[i].status = "interview";
+      }
+    }
     renderJobs();
   }
 
