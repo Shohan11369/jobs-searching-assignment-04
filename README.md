@@ -25,14 +25,17 @@
 4. What is Event Delegation in JavaScript? Why is it useful?
     answer:
             i. event delegation: instead of adding event listener to many child elements, we add one listener to their parent, then check which child triggered event.
+            Useful:
+                   i.Save memory
+                   ii. Clean code
+                   iii. Dynamic element ,later if i want top add new button its also work
+                   
 
-
-
-
- 5. What is the difference between preventDefault() and stopPropagation() methods?
+ 6. What is the difference between preventDefault() and stopPropagation() methods?
  
     answer:
             i. preventDefault() => Stops the default browser action.
             ii. stopPropagation() => Stops the event from bubbling up to parent elements.           
            
+
 
