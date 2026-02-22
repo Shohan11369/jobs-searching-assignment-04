@@ -160,6 +160,28 @@ function renderJobs() {
   }
 
   updateDashboard();
-
-  
 }
+
+// button section
+
+document.addEventListener("click", function (event) {
+  // tab button
+  if (event.target.id === "allTab") {
+    currentTab = "all";
+    setActiveTab(event.target);
+    renderJobs();
+    console.log(renderJobs);
+  }
+
+  if (event.target.id === "interviewTab") {
+    currentTab = "interview";
+    setActiveTab(event.target);
+    renderJobs();
+  }
+
+  if (event.target.id === "rejectedTab") {
+    currentTab = "rejected";
+    setActiveTab(event.target);
+    renderJobs();
+  }
+});
