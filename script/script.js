@@ -135,12 +135,12 @@ function renderJobs() {
     let job = filteredJobs[i];
 
     let card = document.createElement("div");
-    card.className = "bg-gray-50 p-5 rounded-xl shadow";
+    card.className = "bg-gray-50 p-5 rounded-xl shadow mt-4";
 
     card.innerHTML = `
        <h3 class="text-xl font-bold">${job.position}</h3>
         <div class="flex justify-end">
-          <div><button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Delete</button></div>
+          <div><button class="deleteBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Delete</button></div>
         </div>
        <p>${job.company}</p>
        <p>${job.location} ${job.Type}</p>
@@ -148,9 +148,9 @@ function renderJobs() {
        <p>${job.description}</p>
        
 
-       <div class="">
+       <div class="flex gap-3 mt-4">
            <button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Interview</button>
-           <button class="interviewBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Rejected</button>  
+           <button class="rejectedBtn bg-green-500 text-white px-3 py-1 rounded" data-id=${job.id}>Rejected</button>  
            
        </div>
        
@@ -162,7 +162,7 @@ function renderJobs() {
   updateDashboard();
 }
 
-// button section
+// button section click
 
 document.addEventListener("click", function (event) {
   // tab button
@@ -170,7 +170,7 @@ document.addEventListener("click", function (event) {
     currentTab = "all";
     setActiveTab(event.target);
     renderJobs();
-    console.log(renderJobs);
+    
   }
 
   if (event.target.id === "interviewTab") {
@@ -185,7 +185,7 @@ document.addEventListener("click", function (event) {
     renderJobs();
   }
 
-  // rejhected button
+  // rejected button
 
   if (event.target.classList.contains("rejectedBtn")) {
     let id = Number(event.target.dataset.id);
@@ -198,7 +198,17 @@ document.addEventListener("click", function (event) {
     renderJobs();
   }
 
- 
+  // delete button
+
+  if (event.target.classList.contains("deleteBtn")) {
+    let id = Number(event.target.dataset.id);
+
+    jobs = jobs.filter(function (job) {
+      return job.id !== id;
+    });
+
+    renderJobs();
+  }
 });
 
 // active tab
@@ -206,7 +216,7 @@ document.addEventListener("click", function (event) {
 function setActiveTab(activeButton) {
   let tabs = document.querySelectorAll(".tab-btn");
 
-  for (let i = 0; i < tabs.lengths; i++) {
+  for (let i = 0; i < tabs.length; i++) {
     tabs[i].classList.remove("bg-black", "text-white");
     tabs[i].classList.add("bg-gray-200");
   }
